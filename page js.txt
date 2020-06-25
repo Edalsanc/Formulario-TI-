@@ -1,0 +1,646 @@
+<script>
+
+   
+    
+     document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+    //inicializa todo lo que tenga materialize
+    M.AutoInit();
+
+    //**ACTIVAR BOTONES**//
+    
+    document.getElementById("buscar").addEventListener("click", getBuscar);
+    document.getElementById("editarUrgencia").addEventListener("click", setEditarUrgencia);
+    document.getElementById("editPrioridad").addEventListener("click", setEditarPrioridad);
+    document.getElementById("editarEstado").addEventListener("click", setEditarEstado);
+    document.getElementById("editarAsignar").addEventListener("click", setEditarAsignar);
+    document.getElementById("editarSolucion").addEventListener("click", setEditarSolucion);
+   
+   
+    
+    
+
+
+    //////////////////////////////
+    ////////////Buscar///////////
+    ////////////////////////////
+
+    function getBuscar() {
+
+        var codigo = document.getElementById("cod").value;
+        // document.getElementById("new").value = code;
+
+        //if (code.length === 5){
+        
+        
+        google.script.run.withSuccessHandler(actualizarDateIn).getDateIn(codigo);
+        google.script.run.withSuccessHandler(actualizarDateFin).getDateFin(codigo);
+        google.script.run.withSuccessHandler(actualizarDateRes).getDateRes(codigo);
+        google.script.run.withSuccessHandler(actualizarDateSol).getDateSol(codigo);
+        
+        google.script.run.withSuccessHandler(actualizarUrgencia).getUrgencia(codigo);
+        google.script.run.withSuccessHandler(actualizarPrioridad).getPrioridad(codigo);
+        google.script.run.withSuccessHandler(actualizarEstado).getEstado(codigo);
+        
+        google.script.run.withSuccessHandler(actualizarNombre).getNombre(codigo);
+        google.script.run.withSuccessHandler(actualizarApellido).getApellido(codigo);
+        google.script.run.withSuccessHandler(actualizarCorreo).getCorreo(codigo);
+        google.script.run.withSuccessHandler(actualizarTel).getTel(codigo);
+        
+        google.script.run.withSuccessHandler(actualizarUbicacion).getUbicacion(codigo);
+        google.script.run.withSuccessHandler(actualizarCategoria).getCategoria(codigo);
+        google.script.run.withSuccessHandler(actualizarSubCategoria).getSubCategoria(codigo);
+        google.script.run.withSuccessHandler(actualizarAdjunto).getAdjunto(codigo);
+        
+        google.script.run.withSuccessHandler(actualizarDescripcion).getDescripcion(codigo);
+        google.script.run.withSuccessHandler(actualizarAsignar).getAsignar(codigo);
+        google.script.run.withSuccessHandler(actualizarSolucion).getSolucion(codigo);
+
+        
+        
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").value = "";
+        document.getElementById("dateSol").value = "";
+        
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 0;
+        M.FormSelect.init(prio);
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+        
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+        
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+        
+        document.getElementById("descripUser").value = "";
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+        
+        document.getElementById("descripSolucion").value = "";
+
+
+
+        // }
+    }
+
+
+    
+    
+     //**ACTUALIZAR FECHA INICIAL**//
+
+    function actualizarDateIn(dato) {
+
+        document.getElementById("dateIn").value = dato.toString();
+
+
+    }
+    
+     //**ACTUALIZAR FECHA FINAL**//
+
+    function actualizarDateFin(dato) {
+
+       
+        document.getElementById("dateFin").value = dato;
+         
+
+    }
+    
+    
+    //**ACTUALIZAR TIEMPO RESTANTE**//
+
+    function actualizarDateRes(dato) {
+
+        
+        document.getElementById("dateRes").value = dato;
+         
+
+    }
+    
+    
+     //**ACTUALIZAR FECHA DE SOLUCION**//
+
+    function actualizarDateSol(dato) {
+
+     
+        document.getElementById("dateSol").value = dato;
+         
+
+    }
+    
+    
+    //**ACTUALIZAR URGENCIA**//
+
+    function actualizarUrgencia(dato) {
+
+       if (dato == "Baja"){
+       var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 1;
+        M.FormSelect.init(urg);
+       
+       }else if (dato == "Critica"){
+       var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 2;
+        M.FormSelect.init(urg);
+       
+       
+       }else if (dato == "Intermedia"){
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 3;
+        M.FormSelect.init(urg);
+        }
+
+
+    }
+    
+    
+    
+     //**ACTUALIZAR PRIORIDAD**//
+
+    function actualizarPrioridad(dato) {
+
+       if (dato == "Alta(Critica)"){
+       var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 1;
+        M.FormSelect.init(prio);
+       
+       }else if (dato == "Medio"){
+       var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 2;
+        M.FormSelect.init(prio);
+       
+       
+       }else if (dato == "Baja"){
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 3;
+        M.FormSelect.init(prio);
+        }
+
+
+    }
+    
+    
+    
+     //**ACTUALIZAR ESTADO**//
+
+    function actualizarEstado(dato) {
+
+       if (dato == "Resuelto"){
+       var est = document.getElementById("estado");
+        est.selectedIndex = 1;
+        M.FormSelect.init(est);
+       
+       
+       
+       }else if (dato == "Cerrado"){
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 2;
+        M.FormSelect.init(est);
+        }
+
+
+    }
+    
+   
+    
+
+    //**ACTUALIZAR NOMBRE**//
+
+    function actualizarNombre(dato) {
+
+        document.getElementById("nombre").value = dato;
+
+
+    }
+
+
+    //**ACTUALIZAR APELLIDO**//
+
+    function actualizarApellido(dato) {
+
+        document.getElementById("apellido").value = dato;
+
+    }
+
+    //**ACTUALIZAR CORREO**//
+
+    function actualizarCorreo(dato) {
+
+        document.getElementById("correo").value = dato;
+
+    }
+
+    //**ACTUALIZAR TELEFONO**//
+
+    function actualizarTel(dato) {
+
+        document.getElementById("tel").value = dato;
+
+    }
+    
+    
+     //**ACTUALIZAR UBICACION**//
+
+    function actualizarUbicacion(dato) {
+
+        document.getElementById("ubicacion").value = dato;
+
+    }
+    
+    
+    //**ACTUALIZAR CATEGORIA**//
+
+    function actualizarCategoria(dato) {
+
+      document.getElementById("categoria").value = dato;
+
+    }
+    
+    
+    //**ACTUALIZAR SUBCATEGORIA**//
+
+    function actualizarSubCategoria(dato) {
+
+       document.getElementById("subCategoria").value = dato;
+
+
+
+    }
+    
+      //**ACTUALIZAR ADJUNTO**//
+
+    function actualizarAdjunto(dato) {
+
+        document.getElementById("adjunto").value = dato;
+
+    }
+    
+     //**ACTUALIZAR DESCRIPCION**//
+
+    function actualizarDescripcion(dato) {
+
+        document.getElementById("descripUser").value = dato;
+
+    }
+    
+    
+    
+     //**ACTUALIZAR ASIGNAR**//
+
+    function actualizarAsignar(dato) {
+
+       if (dato == "Wilmar Alonso Quiros Usuga"){
+       var asig = document.getElementById("asignar");
+        asig.selectedIndex = 1;
+        M.FormSelect.init(asig);
+       
+       }else if (dato == "Sebastian Alejandro Cataño Velasquez"){
+       var asig = document.getElementById("asignar");
+        asig.selectedIndex = 2;
+        M.FormSelect.init(asig);
+       
+       
+       }else if (dato == "Santiago Cubides"){
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 3;
+        M.FormSelect.init(asig);
+        
+        }else if (dato == "Edwin Alejandro Sanchez Rojas"){
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 4;
+        M.FormSelect.init(asig);
+        
+         }else if (dato == "Externo"){
+         
+         var asig = document.getElementById("asignar");
+        asig.selectedIndex = 5;
+        M.FormSelect.init(asig);
+         
+         }
+
+
+    }
+     //**ACTUALIZAR SOLUCION**//
+
+    function actualizarSolucion(dato) {
+
+        document.getElementById("descripSolucion").value = dato;
+
+    }
+
+
+
+
+
+    //////////////////////
+    ////////Editar////////
+    /////////////////////
+
+   
+   function setEditarUrgencia() {
+
+        var codigo = document.getElementById("cod").value;
+        var urgencia = document.getElementById("urgencia").value;
+        
+        //var app = document.getElementById("app").value;
+
+
+        google.script.run.editarUrgencia(codigo, urgencia);
+        
+        // google.script.run.editarApellido(codigo,apellido);
+        //google.script.run.editarApp(codigo,app);
+
+        
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").value = "";
+        document.getElementById("dateSol").value = "";
+        
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 0;
+        M.FormSelect.init(prio);
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+        
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+        
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+        
+        document.getElementById("descripUser").value = "";
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+        
+        document.getElementById("descripSolucion").value = "";
+
+
+
+    }
+    
+    
+    
+    
+    function setEditarPrioridad() {
+
+        var codigo = document.getElementById("cod").value;
+        var prioridad = document.getElementById("prioridad").value;
+        
+        //var app = document.getElementById("app").value;
+
+
+        google.script.run.editarPrioridad(codigo, prioridad);
+        
+        // google.script.run.editarApellido(codigo,apellido);
+        //google.script.run.editarApp(codigo,app);
+
+        
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").value = "";
+        document.getElementById("dateSol").value = "";
+        
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 0;
+        M.FormSelect.init(prio);
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+        
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+        
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+        
+        document.getElementById("descripUser").value = "";
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+        
+        document.getElementById("descripSolucion").value = "";
+
+
+
+    }
+   
+   
+   
+   
+   
+   
+   
+   function setEditarEstado() {
+
+        var codigo = document.getElementById("cod").value;
+        var estado = document.getElementById("estado").value;
+        
+        //var app = document.getElementById("app").value;
+
+
+        google.script.run.editarEstado(codigo, estado);
+        
+        // google.script.run.editarApellido(codigo,apellido);
+        //google.script.run.editarApp(codigo,app);
+
+        
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").value = "";
+        document.getElementById("dateSol").value = "";
+        
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 0;
+        M.FormSelect.init(prio);
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+        
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+        
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+        
+        document.getElementById("descripUser").value = "";
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+        
+        document.getElementById("descripSolucion").value = "";
+
+
+    }
+    
+    
+    
+    
+    function setEditarAsignar() {
+
+        var codigo = document.getElementById("cod").value;
+        var asignar = document.getElementById("asignar").value;
+        
+        //var app = document.getElementById("app").value;
+
+
+        google.script.run.editarAsignar(codigo, asignar);
+        
+        // google.script.run.editarApellido(codigo,apellido);
+        //google.script.run.editarApp(codigo,app);
+
+       
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").value = "";
+        document.getElementById("dateSol").value = "";
+        
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 0;
+        M.FormSelect.init(prio);
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+        
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+        
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+        
+        document.getElementById("descripUser").value = "";
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+        
+        document.getElementById("descripSolucion").value = "";
+
+
+
+
+    }
+    
+    
+    function setEditarSolucion() {
+    
+    var codigo = document.getElementById("cod").value;
+       
+        var solucion = document.getElementById("descripSolucion").value;
+        //var app = document.getElementById("app").value;
+
+
+       
+        google.script.run.editarSolucion(codigo, solucion);
+        // google.script.run.editarApellido(codigo,apellido);
+        //google.script.run.editarApp(codigo,app);
+
+        
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").value = "";
+        document.getElementById("dateSol").value = "";
+        
+        
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+        
+        var prio = document.getElementById("prioridad");
+        prio.selectedIndex = 0;
+        M.FormSelect.init(prio);
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+        
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+        
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+        
+        document.getElementById("descripUser").value = "";
+        
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+        
+        document.getElementById("descripSolucion").value = "";
+
+    
+    }
+
+
+
+</script>

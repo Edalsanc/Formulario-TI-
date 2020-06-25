@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+</head>
+
+
+<body>
+
+    <div class="section container ">
+        <div class="row">
+            <div class="row card-panel grey lighten-5">
+
+                <div class="row card-panel amber lighten-5">
+                    <h5 align="center">INCIDENTES, REQUERIMIENTOS Y TAREAS</h5>
+                </div>
+
+
+                <div class="input-field col s3 ">
+                    <label for="">Codigo</label>
+                    <input placeholder="Codigo" type="number" id="cod" name="cod" />
+
+                </div>
+
+
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light grey darken-4" id="buscar" name="buscar">Buscar
+                        <i class="material-icons right">search</i>
+                    </button>
+                </div>
+                
+              
+                <div class="input-field col s3">
+                <p  style="color:red" id="dateRes" name="dateRes" ></p>
+                   <!-- <input placeholder="Tiempo restante" id="dateRes" name="dateRes" type="text" class="validate">-->
+                    <label for="dateRes"></label>
+                </div>
+              
+
+
+                <div class="input-field col s12"></div>
+
+
+                <div class="input-field col s3">
+                    <input placeholder="Fecha inicio"id="dateIn" name="dateIn" type="text" class="validate">
+                    <label for="dateIn">Fecha inicio</label>
+                </div>
+
+
+                <div class="input-field col s3">
+                    <input placeholder="Fecha final" id="dateFin" name="dateFin" type="text" class="validate">
+                    <label for="dateFin">Fecha fin</label>
+                </div>
+
+                 
+                
+                
+
+                <div class="input-field col s6">
+                    <input placeholder="Fecha de solucion" id="dateSol" name="dateSol" type="text" class="validate">
+                    <label for="dateSol">Fecha solucion</label>
+                </div>
+
+                <div class="input-field col s3">
+                    <select name="urgencia" id="urgencia">
+                        <option value="" disabled selected>Ingrese una opcion</option>
+                        <option>Baja</option>
+                        <option>Crítica</option>
+                        <option>Intermedia</option>
+                        
+                    </select>
+                    <label for="urgencia">Urgencia</label>
+                </div>
+
+                <div class="input-field col s3">
+                    <button class="btn waves-effect waves-light grey darken-4" id="editarUrgencia" name="editarUrgencia">Editar
+                        Urgencia
+
+                    </button>
+                </div>
+
+
+
+                <div class="input-field col s3">
+                    <select name="prioridad" id="prioridad">
+                        <option value="" disabled selected>Ingrese una opcion</option>
+                        <option>Muy Alta (Crítica)</option>
+                        <option>Alta (Crítica)</option>
+                        <option>Medio</option>
+                        <option>Baja</option>
+                    </select>
+                    <label for="prioridad">Prioridad</label>
+                </div>
+
+                <div class="input-field col s3">
+                    <button class="btn waves-effect waves-light grey darken-4" id="editPrioridad"
+                        name="editPrioridad">Editar prioridad
+
+                    </button>
+                </div>
+
+                <div class="input-field col s12"></div>
+
+
+                <div class="input-field col s3">
+                    <select name="estado" id="estado">
+                        <option value="" disabled selected>Ingrese una opcion</option>
+                        <option>Abierto</option>
+                        <option>Resuelto</option>
+                        <option>Cerrado</option>
+                    </select>
+                    <label for="estado">Estado</label>
+                </div>
+
+                <div class="input-field col s9">
+                    <button class="btn waves-effect waves-light grey darken-4" id="editarEstado"
+                        name="editarEstado">Editar Estado
+                        <!-- <i class="material-icons right">editar</i>-->
+                    </button>
+                </div>
+
+
+                <div class="input-field col s12"></div>
+
+
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input placeholder="nombre" id="nombre" name="nombre" type="text" class="validate">
+                    <label for="nombre">Nombre</label>
+                </div>
+
+                <div class="input-field col s3">
+                    <input placeholder="apellido" id="apellido" name="apellido" type="text" class="validate">
+                    <label for="apellido">Apellido</label>
+                </div>
+
+
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">mail</i>
+                    <input placeholder="correo" id="correo" name="correo" type="email" class="validate">
+                    <label for="correo">Correo</label>
+                </div>
+
+
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">phone</i>
+                    <input placeholder="telefono" id="tel" name="tel" type="number" class="validate">
+                    <label for="tel">Telefono</label>
+                </div>
+
+
+                <div class="input-field col s3">
+                    <input placeholder="ubicacion" id="ubicacion" name="ubicacion" type="text" class="validate">
+                    <label for="ubicacion">Ubicacion especifica</label>
+                </div>
+
+
+
+
+
+                <div class="input-field col s3">
+                    <input placeholder="Categoria" id="categoria" name="categoria" type="text" class="validate">
+                    <label for="categoria ">Categoria</label>
+                </div>
+
+
+
+
+
+                <div class="input-field col s3">
+                    <input placeholder="SubCategoria" id="subCategoria" name="subCategoria" type="text"
+                        class="validate">
+                    <label for="subCategoria ">SubCategoria</label>
+                </div>
+
+
+                <div class="input-field col s3">
+                    <input placeholder="adjunto" id="adjunto" name="adjunto" type="text" class="validate">
+                    <label for="adjunto ">Adjunto</label>
+                </div>
+
+
+                <div class="input-field col s12">
+                    <textarea placeholder="Descripcion" id="descripUser" name="descripUser"
+                        class="materialize-textarea"></textarea>
+                    <!-- <input id="descripUser" name="descripUser" type="text" class="validate">-->
+                    <label for="descripUser">Descripcion general </label>
+
+                </div>
+
+
+
+                <div class="input-field col s6">
+                    <select name="asignar" id="asignar">
+                        <option value="" disabled selected>Ingrese una opcion</option>
+                        <option>Wilmar Alonso Quiros Usuga</option>
+                        <option>Sebastian Alejandro Cataño Velasquez</option>
+                        <option>Santiago Cubides</option>
+                        <option>Edwin Alejandro Sanchez Rojas</option>
+                        <option>Externo</option>
+                    </select>
+                    <label for="asignar">Asignar</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <button class="btn waves-effect waves-light grey darken-4" id="editarAsignar"
+                        name="editarAsignar">Editar Asignar
+
+                    </button>
+                </div>
+
+                <div class="input-field col s12"></div>
+
+
+                <div class="input-field col s9">
+                    <textarea placeholder="Solucion" id="descripSolucion" name="descripSolucion"
+                        class="materialize-textarea"></textarea>
+                    <!-- <input id="descripSolucion" name="descripSolucion" type="text" class="validate">-->
+                    <label for="descripSolucion">Descripcion de la solucion</label>
+
+                </div>
+
+                <div class="input-field col s3">
+                    <button class="btn waves-effect waves-light grey darken-4" id="editarSolucion"
+                        name="editarSolucion">Editar Solucion
+                        <!--  <i class="material-icons right">editar</i>-->
+                    </button>
+                </div>
+                
+                 <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light grey darken-4" id="editarTodo"
+                        name="editarTodo">Editar Todo
+                        <!--  <i class="material-icons right">editar</i>-->
+                    </button>
+                </div>
+
+
+
+
+            </div>
+            <!--CLOSE CARD-PANEL-->
+        </div>
+        <!--CLOSE ROW-->
+    </div>
+    <!--CLOSE CONTAINER-->
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+     <?!= include("page-js");?> 
+
+   
+</body>
+
+
+</html>
+

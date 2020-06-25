@@ -1,0 +1,445 @@
+<script>
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+    //inicializa todo lo que tenga materialize
+    M.AutoInit();
+
+    //**ACTIVAR BOTONES**//
+    document.getElementById("buscar").addEventListener("click", getBuscar);
+    document.getElementById("editarUrgencia").addEventListener("click", setEditarUrgencia);
+    document.getElementById("editarEstado").addEventListener("click", setEditarEstado);
+    document.getElementById("editarAsignar").addEventListener("click", setEditarAsignar);
+    document.getElementById("editarSolucion").addEventListener("click", setEditarSolucion);
+    document.getElementById("editarTodo").addEventListener("click", setEditarTodo);
+
+
+
+
+    /////////////////////////////
+    ///////////Limpiar///////////
+    /////////////////////////////
+
+
+
+    function limpiar() {
+
+        document.getElementById("dateIn").value = "";
+        document.getElementById("dateFin").value = "";
+        document.getElementById("dateRes").textContent = "";
+        document.getElementById("dateSol").value = "";
+
+
+        var urg = document.getElementById("urgencia");
+        urg.selectedIndex = 0;
+        M.FormSelect.init(urg);
+
+        document.getElementById("prioridad").value ="";
+        
+        var est = document.getElementById("estado");
+        est.selectedIndex = 0;
+        M.FormSelect.init(est);
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("tel").value = "";
+
+        document.getElementById("ubicacion").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("subCategoria").value = "";
+        document.getElementById("adjunto").value = "";
+
+        document.getElementById("descripUser").value = "";
+        document.getElementById("afectacion").value = "";
+
+        var asig = document.getElementById("asignar");
+        asig.selectedIndex = 0;
+        M.FormSelect.init(asig);
+
+        document.getElementById("descripSolucion").value = "";
+
+
+    }
+
+    /////////////////////////////
+    ////////////Buscar///////////
+    /////////////////////////////
+
+
+    function getBuscar() {
+
+        var codigo = document.getElementById("cod").value;
+
+        google.script.run.withSuccessHandler(actualizarDateIn).getDateIn(codigo);
+        google.script.run.withSuccessHandler(actualizarDateFin).getDateFin(codigo);
+        google.script.run.withSuccessHandler(actualizarDateRes).getDateRes(codigo);
+        google.script.run.withSuccessHandler(actualizarDateSol).getDateSol(codigo);
+
+        google.script.run.withSuccessHandler(actualizarUrgencia).getUrgencia(codigo);
+        google.script.run.withSuccessHandler(actualizarPrioridad).getPrioridad(codigo);
+        google.script.run.withSuccessHandler(actualizarEstado).getEstado(codigo);
+
+        google.script.run.withSuccessHandler(actualizarNombre).getNombre(codigo);
+        google.script.run.withSuccessHandler(actualizarApellido).getApellido(codigo);
+        google.script.run.withSuccessHandler(actualizarCorreo).getCorreo(codigo);
+        google.script.run.withSuccessHandler(actualizarTel).getTel(codigo);
+
+        google.script.run.withSuccessHandler(actualizarUbicacion).getUbicacion(codigo);
+        google.script.run.withSuccessHandler(actualizarCategoria).getCategoria(codigo);
+        google.script.run.withSuccessHandler(actualizarSubCategoria).getSubCategoria(codigo);
+        google.script.run.withSuccessHandler(actualizarAdjunto).getAdjunto(codigo);
+
+        google.script.run.withSuccessHandler(actualizarDescripcion).getDescripcion(codigo);
+        google.script.run.withSuccessHandler(actualizarAfectacion).getAfectacion(codigo);
+        google.script.run.withSuccessHandler(actualizarAsignar).getAsignar(codigo);
+        google.script.run.withSuccessHandler(actualizarSolucion).getSolucion(codigo);
+
+        limpiar();
+
+
+    }
+
+
+
+
+    //**ACTUALIZAR FECHA INICIAL**//
+    function actualizarDateIn(dato) {
+
+        document.getElementById("dateIn").value = dato.toString();
+
+
+    }
+
+    //**ACTUALIZAR FECHA FINAL**//
+    function actualizarDateFin(dato) {
+
+
+       document.getElementById("dateFin").value = dato;
+        
+        
+
+    }
+
+
+    //**ACTUALIZAR TIEMPO RESTANTE**//
+    function actualizarDateRes(dato) {
+
+        var horas= ("");
+        var min= ("");
+        
+        
+        //dato1.split(",");
+        
+        //var hora = dato.substr(0,2);
+        
+        var sw = false;
+        for(var i = 0; i < dato.length;i++){
+         if (dato[i]== ","||dato[i]== "."){
+         
+          horas = dato.substr(0,i);
+          min = dato.substr(i+1,8);
+          var min2 = min*60;//minutos
+          var seg = min2*60;//segundos
+          var seg2 = seg.toString();
+          seg = seg2.substr(0,2);
+          min = min2.toString();
+          min2 = min.substr(0,2);
+         
+          sw = true;
+         }
+         
+        
+        }
+        if (sw == true){
+        
+       document.getElementById("dateRes").textContent = (horas+" : "+min2+" : "+seg);
+       
+        
+        }
+        
+        
+     }
+    
+
+
+    //**ACTUALIZAR FECHA DE SOLUCION**//
+    function actualizarDateSol(dato) {
+
+        document.getElementById("dateSol").value = dato;
+
+
+    }
+
+
+    //**ACTUALIZAR URGENCIA**//
+    function actualizarUrgencia(dato) {
+
+        if (dato == "Baja") {
+            var urg = document.getElementById("urgencia");
+            urg.selectedIndex = 1;
+            M.FormSelect.init(urg);
+
+        } else if (dato == "Crítica") {
+            var urg = document.getElementById("urgencia");
+            urg.selectedIndex = 2;
+            M.FormSelect.init(urg);
+
+
+        } else if (dato == "Intermedia") {
+
+            var urg = document.getElementById("urgencia");
+            urg.selectedIndex = 3;
+            M.FormSelect.init(urg);
+        }
+
+
+    }
+
+
+
+    //**ACTUALIZAR PRIORIDAD**//
+    function actualizarPrioridad(dato) {
+
+
+        document.getElementById("prioridad").value = dato ;
+            
+
+    }
+
+
+
+    //**ACTUALIZAR ESTADO**//
+    function actualizarEstado(dato) {
+
+        if (dato == "Abierto") {
+            var est = document.getElementById("estado");
+            est.selectedIndex = 1;
+            M.FormSelect.init(est);
+
+        } else if (dato == "Resuelto") {
+
+            var est = document.getElementById("estado");
+            est.selectedIndex = 2;
+            M.FormSelect.init(est);
+
+
+
+        } else if (dato == "Cerrado") {
+
+            var est = document.getElementById("estado");
+            est.selectedIndex = 3;
+            M.FormSelect.init(est);
+        }
+
+
+    }
+
+
+
+
+    //**ACTUALIZAR NOMBRE**//
+    function actualizarNombre(dato) {
+
+        document.getElementById("nombre").value = dato;
+
+
+    }
+
+
+    //**ACTUALIZAR APELLIDO**//
+    function actualizarApellido(dato) {
+
+        document.getElementById("apellido").value = dato;
+
+    }
+
+    //**ACTUALIZAR CORREO**//
+    function actualizarCorreo(dato) {
+
+        document.getElementById("correo").value = dato;
+
+    }
+
+    //**ACTUALIZAR TELEFONO**//
+    function actualizarTel(dato) {
+
+        document.getElementById("tel").value = dato;
+
+    }
+
+
+    //**ACTUALIZAR UBICACION**//
+    function actualizarUbicacion(dato) {
+
+        document.getElementById("ubicacion").value = dato;
+
+    }
+
+
+    //**ACTUALIZAR CATEGORIA**//
+    function actualizarCategoria(dato) {
+
+        document.getElementById("categoria").value = dato;
+
+    }
+
+
+    //**ACTUALIZAR SUBCATEGORIA**//
+    function actualizarSubCategoria(dato) {
+
+        document.getElementById("subCategoria").value = dato;
+
+
+    }
+
+    //**ACTUALIZAR ADJUNTO**//
+    function actualizarAdjunto(dato) {
+
+        document.getElementById("adjunto").value = dato;
+
+    }
+
+
+    //**ACTUALIZAR DESCRIPCION**//
+    function actualizarDescripcion(dato) {
+
+        document.getElementById("descripUser").value = dato;
+
+    }
+     
+     //**ACTUALIZAR AFECTACION**//
+    function actualizarAfectacion(dato) {
+
+        document.getElementById("afectacion").value = dato;
+
+    }
+
+    //**ACTUALIZAR ASIGNAR**//
+    function actualizarAsignar(dato) {
+
+        if (dato == "Wilmar Alonso Quiros Usuga") {
+            var asig = document.getElementById("asignar");
+            asig.selectedIndex = 1;
+            M.FormSelect.init(asig);
+
+        } else if (dato == "Sebastian Alejandro Cataño Velasquez") {
+            var asig = document.getElementById("asignar");
+            asig.selectedIndex = 2;
+            M.FormSelect.init(asig);
+
+
+        } else if (dato == "Santiago Cubides") {
+
+            var asig = document.getElementById("asignar");
+            asig.selectedIndex = 3;
+            M.FormSelect.init(asig);
+
+        } else if (dato == "Edwin Alejandro Sanchez Rojas") {
+
+            var asig = document.getElementById("asignar");
+            asig.selectedIndex = 4;
+            M.FormSelect.init(asig);
+
+        } else if (dato == "Externo") {
+
+            var asig = document.getElementById("asignar");
+            asig.selectedIndex = 5;
+            M.FormSelect.init(asig);
+
+        }
+
+
+    }
+
+    //**ACTUALIZAR SOLUCION**//
+    function actualizarSolucion(dato) {
+
+        document.getElementById("descripSolucion").value = dato;
+
+    }
+
+
+
+    /////////////////////
+    ///////Editar////////
+    /////////////////////
+
+
+    function setEditarUrgencia() {
+
+        var codigo = document.getElementById("cod").value;
+        var urgencia = document.getElementById("urgencia").value;
+
+
+        google.script.run.editarUrgencia(codigo, urgencia);
+        limpiar();
+
+
+
+    }
+
+
+
+    function setEditarEstado() {
+
+        var codigo = document.getElementById("cod").value;
+        var estado = document.getElementById("estado").value;
+
+        google.script.run.editarEstado(codigo, estado);
+        limpiar();
+
+
+    }
+
+
+
+    function setEditarAsignar() {
+
+        var codigo = document.getElementById("cod").value;
+        var asignar = document.getElementById("asignar").value;
+
+        google.script.run.editarAsignar(codigo, asignar);
+        limpiar();
+
+
+    }
+
+
+    function setEditarSolucion() {
+
+        var codigo = document.getElementById("cod").value;
+        var solucion = document.getElementById("descripSolucion").value;
+
+        google.script.run.editarSolucion(codigo, solucion);
+        limpiar();
+
+
+    }
+
+
+    function setEditarTodo() {
+
+        var codigo = document.getElementById("cod").value;
+        var urgencia = document.getElementById("urgencia").value;
+        var estado = document.getElementById("estado").value;
+        var asignar = document.getElementById("asignar").value;
+        var solucion = document.getElementById("descripSolucion").value;
+
+        google.script.run.editarUrgencia(codigo, urgencia);
+        google.script.run.editarEstado(codigo, estado);
+        google.script.run.editarAsignar(codigo, asignar);
+        google.script.run.editarSolucion(codigo, solucion);
+
+        limpiar();
+
+
+    }
+
+
+
+</script>

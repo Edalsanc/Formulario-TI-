@@ -1,0 +1,7 @@
+Correo, 
+Nombre, 
+cedula, 
+
+Prueba de internet 1( Imagen), Prueba int1 Velocidad de subida y de bajada y Ping,
+ 
+prueba de internet 2 ( Imagen) Velocidad de subida y de bajada y Ping. Medio de conexión por el que se conecta habitualmente, Nivel de señal, Prueba de ping ( pantallazo)

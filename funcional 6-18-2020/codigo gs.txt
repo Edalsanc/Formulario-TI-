@@ -1,0 +1,372 @@
+function doGet(iSession) {
+
+        var principal = HtmlService.createTemplateFromFile('Index');
+        principal.data = iSession;
+        return principal.evaluate();
+
+
+    }
+
+
+    function include(filename) {
+        return HtmlService.createHtmlOutputFromFile(filename).getContent();
+
+    }
+
+   
+
+
+    //*DEVUELVE DATO BUSCADO APARTIR DE CODIGO Y COLUMNA*//
+    function buscarEnHoja(code, colum) {
+        var spr = SpreadsheetApp.openById( "1V5vPCmf9UuQtQ3i_J9AADiHZx6wtUStWr0NvljhUqUw");
+        var hoja = spr.getSheetByName("Data");
+
+        //Rango: (primera fila, primera columna,todas las filas)
+        //columna de codigo
+        var datosCodigo = hoja.getRange(1, 30, hoja.getLastRow()).getValues();
+
+        //datos de la columna enviada
+        var datos = hoja.getRange(1, colum, hoja.getLastRow()).getValues();
+
+        var sw = false;
+
+        for (var i = 0; i < datosCodigo.length; i++) {
+            for (var j = 0; j < datosCodigo.length; j++) {
+                if (code == datosCodigo[i][j]) {
+                    var fila = i;
+                    var columna = j;
+                    sw = true;
+                }
+            }
+        }
+
+        if (sw == true) {
+
+            return datos[fila][columna];
+        } else {
+
+            return "No existe codigo";
+        }
+    }
+    
+    
+   
+
+//*DEVUELVE DATO BUSCADO APARTIR DE CODIGO Y COLUMNA*//
+    function buscarEnHojaDate(code, colum) {
+        var spr = SpreadsheetApp.openById( "1V5vPCmf9UuQtQ3i_J9AADiHZx6wtUStWr0NvljhUqUw");
+        var hoja = spr.getSheetByName("Data");
+
+        //Rango: (primera fila, primera columna,todas las filas)
+        //columna de codigo
+        var datosCodigo = hoja.getRange(1, 30, hoja.getLastRow()).getValues();
+
+        //datos de la columna enviada
+        var datos = hoja.getRange(1, colum, hoja.getLastRow()).getValues();
+
+        var sw = false;
+
+        for (var i = 0; i < datosCodigo.length; i++) {
+            for (var j = 0; j < datosCodigo.length; j++) {
+                if (code == datosCodigo[i][j]) {
+                    var fila = i;
+                    var columna = j;
+                    sw = true;
+                }
+            }
+        }
+
+        if (sw == true) {
+
+            return datos[fila][columna].toLocaleString();
+        } else {
+
+            return "No existe codigo";
+        }
+    }
+
+
+    //**GET FECHA INICIAL**//
+
+    function getDateIn(code) {
+        var codigo = code;
+
+        return buscarEnHojaDate(codigo, 41);
+    }
+
+    //**GET FECHA FINAL**//
+
+    function getDateFin(code) {
+        var codigo = code;
+
+        return buscarEnHojaDate(codigo, 42);
+    }
+
+ //**GET TIEMPO RESTANTE**//
+
+    function getDateRes(code) {
+        var codigo = code;
+
+        return buscarEnHojaDate(codigo, 43);
+    }
+
+//**GET FECHA DE SOLUCION**//
+
+    function getDateSol(code) {
+        var codigo = code;
+
+        return buscarEnHojaDate(codigo, 45);
+    }
+
+
+//**GET URGENCIA**//
+
+    function getUrgencia(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 35);
+    }
+
+ //**GET PRIORIDAD**//
+
+    function getPrioridad(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 36);
+    }
+
+   //**GET ESTADO**//
+
+    function getEstado(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 44);
+    }
+
+
+  
+
+
+
+    //**GET NOMBRE**//
+
+    function getNombre(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 3);
+    }
+
+    //**GET APELLIDO**//
+
+    function getApellido(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 4);
+    }
+
+    //**GET CORREO**//
+
+    function getCorreo(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 2);
+    }
+
+
+    //**GET TEL**//
+
+    function getTel(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 5);
+    }
+
+//**GET UBICACION**//
+
+    function getUbicacion(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 31);
+    }
+
+
+    //**GET CATEGORIA**//
+
+    function getCategoria(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 14);
+    }
+
+    //**GET SUBCATEGORIA**//
+
+    function getSubCategoria(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 33);
+    }
+
+ //**GET ADJUNTO**//
+
+    function getAdjunto(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 27);
+    }
+
+    //**GET DESCRIPCION**//
+
+    function getDescripcion(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 34);
+    }
+
+//**GET ASIGNAR**//
+
+    function getAsignar(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 38);
+    }
+
+    //**GET SOLUCION**//
+
+    function getSolucion(code) {
+        var codigo = code;
+
+        return buscarEnHoja(codigo, 48);
+    }
+
+
+
+
+    
+    //*DEVUELVE UNA POSICION*//
+    function buscarPosicionFila(code) {
+        //var code = 35;
+
+        var spr = SpreadsheetApp.openById( "1V5vPCmf9UuQtQ3i_J9AADiHZx6wtUStWr0NvljhUqUw");
+        var hoja = spr.getSheetByName("Data");
+
+        //Rango: (primera fila, primera columna,todas las filas)
+        //columna de codigo
+        var datosCodigo = hoja.getRange(1, 30, hoja.getLastRow()).getValues();
+
+        var sw = false;
+
+        for (var i = 0; i < datosCodigo.length; i++) {
+            for (var j = 0; j < datosCodigo.length; j++) {
+                if (code == datosCodigo[i][j]) {
+                    var fila = i;
+                    var columna = j;
+                    sw = true;
+                }
+            }
+        }
+
+        if (sw == true) {
+
+            return fila;
+        } else {
+
+            return "No existe codigo";
+        }
+    }
+
+    
+    //*ENVIA EL DATO A LA SHEET
+    function editarPosicion(code, dato, colum) {
+
+
+        var spr = SpreadsheetApp.openById( "1V5vPCmf9UuQtQ3i_J9AADiHZx6wtUStWr0NvljhUqUw");
+        var hoja = spr.getSheetByName("Data");
+
+        //Rango: (primera fila, primera columna,todas las filas)
+        //columna de codigo
+        var datosCodigo = hoja.getRange(1, 30, hoja.getLastRow()).getValues();
+
+
+
+        var sw = false;
+
+        for (var i = 0; i < datosCodigo.length; i++) {
+            for (var j = 0; j < datosCodigo.length; j++) {
+                if (code == datosCodigo[i][j]) {
+                    var fila = i + 1;
+                    var columna = j;
+                    sw = true;
+                }
+            }
+        }
+
+        if (sw == true) {
+
+            hoja.getRange(fila, colum).setValue(dato);
+            //Logger.log(fila);
+
+        } else {
+
+            return "No existe codigo";
+        }
+    }
+
+   
+
+
+   
+ //*EDITA DATO DE LA COLUNA URGENCIA**//
+    function editarUrgencia(code, dato) {
+        var codigo = code;
+
+        editarPosicion(code, dato, 35);
+
+
+    }
+
+  //*EDITA DATO DE LA COLUNA PRIORIDAD**//
+    function editarPrioridad(code, dato) {
+        var codigo = code;
+
+        editarPosicion(code, dato, 36);
+
+
+    }
+
+
+    //*EDITA DATO DE LA COLUNA ESTADO**//
+    function editarEstado(code, dato) {
+        var codigo = code;
+
+        editarPosicion(code, dato, 44);
+
+
+    }
+
+
+ //*EDITA DATO DE LA COLUNA ASIGNAR**//
+    function editarAsignar(code, dato) {
+        var codigo = code;
+
+        editarPosicion(code, dato, 38);
+
+
+    }
+
+
+    
+
+
+
+ //*EDITA DATO DE LA COLUNA SOLUCION**//
+    function editarSolucion(code, dato) {
+        var codigo = code;
+
+        editarPosicion(code, dato, 48);
+
+
+
+    }
+
+
+
